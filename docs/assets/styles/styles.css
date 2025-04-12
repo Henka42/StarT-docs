@@ -16,6 +16,9 @@ UIV { color: #0A0; }
 .md-content a[href$="Acetic Acid"] { color: #ae9d8d; text-decoration-line: underline} 
 .md-content a[href$="Hydrochloric Acid"] { color: #ba9292; text-decoration-line: underline} 
 .md-content a[href$="Hydrofluoric Acid"] { color: #1c8ca8; text-decoration-line: underline} 
+.md-content a[href$="Hydrogen"] { color: #292cd5; text-decoration-line: underline} 
+.md-content a[href$="Oxygen"] { color: #4d9ac1; text-decoration-line: underline} 
+.md-content a[href$="Nitrogen"] { color:rgb(10, 211, 177); text-decoration-line: underline} 
 
 @font-face {
     font-family: "Minecraft";
