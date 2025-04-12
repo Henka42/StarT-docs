@@ -2,6 +2,54 @@
 
 PEEK is a type of plastic that is widely used late-game. In reality, it is a colourless organic thermoplastic polymer in the polyaryletherketone (PAEK) family, used in engineering applications. 
 
+
+
+
+<div class="jei lchem" data-duration="5" data-usage="30720" data-tier="LuV" data-slot1="bone 3" data-slot4="apple 5mB" data-slot12="fluid.chlorine 2B" data-slot9="quantum_star" data-slot10="wetware_processor 5" data-slot11="opv_electric_motor"></div>
+-
+<div class="jei abs" data-duration="3.75" data-usage="16" data-temp="1400" data-coil="Cupronickel" data-tier="LV"></div>
+-
+<div class="jei alloy" data-duration="5" data-usage="16" data-tier="LV"></div>
+-
+<div class="jei arc" data-duration="28.35" data-usage="30" data-tier="LV"></div>
+-
+<div class="jei assembler" data-duration="5" data-usage="8" data-tier="ULV"></div>
+-
+<div class="jei assline" data-duration="1600" data-usage="491520" data-tier="UV" data-note="Requires Research"></div>
+-
+<div class="jei autoclave" data-duration="7.5" data-usage="192" data-tier="HV"></div>
+-
+<div class="jei bender" data-duration="2.8" data-usage="24" data-tier="LV"></div>
+-
+<div class="jei sbf" data-duration="16"></div>
+-
+<div class="jei brewery" data-duration="8" data-usage="3" data-tier="ULV"></div>
+-
+<div class="jei canner" data-duration="5" data-usage="2" data-tier="ULV"></div>
+-
+<div class="jei centrifuge" data-duration="22.8" data-usage="30" data-tier="LV"></div>
+-
+<div class="jei bath" data-duration="14" data-usage="100" data-tier="MV"></div>
+-
+<div class="jei plant" data-duration="30" data-usage="100000" data-tier="ZPM"></div>
+-
+<div class="jei chem" data-duration="4" data-usage="7" data-tier="ULV"></div>
+-
+<div class="jei circuit" data-duration="20" data-usage="7680" data-tier="IV" data-note="Requires Cleanroom"></div>
+-
+<div class="jei cobbleworks" data-duration="1" data-usage="320" data-tier="HV"></div>
+-
+<div class="jei coke" data-duration="45"></div>
+-
+<div class="jei combustion" data-duration="0.4" data-generation="32"></div>
+-
+<div class="jei distower" data-duration="4" data-usage="640" data-tier="EV"></div>
+-
+<div class="jei electrolizer" data-duration="14.3" data-usage="60" data-tier="MV"></div>
+
+
+
+
 ## How to Make PEEK
 
 **PEEK is mainly made from *4,4-Difluorobenzophenone Dust* and *Disodium Salt of Hydroquione dust***

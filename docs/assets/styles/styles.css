@@ -16,3 +16,219 @@ UIV { color: #0A0; }
 .md-content a[href$="Acetic Acid"] { color: #ae9d8d; text-decoration-line: underline} 
 .md-content a[href$="Hydrochloric Acid"] { color: #ba9292; text-decoration-line: underline} 
 .md-content a[href$="Hydrofluoric Acid"] { color: #1c8ca8; text-decoration-line: underline} 
+
+@font-face {
+    font-family: "Minecraft";
+    src: url(../Minecraft-Seven_v2-Plus.woff2) format("woff2");
+}
+
+.minecraftInventory {
+    /* Not used, different style than JEI */
+    width: 344px;
+    background-color: rgb(198, 198, 198);
+    background-clip: padding-box;
+    border: 10px solid transparent;
+    border-image: url('../image/background.png') 5;
+    padding: 0px;
+    image-rendering: crisp-edges;
+    font-family: 'Minecraft', serif;
+}
+
+.jei {
+    position: relative;
+    background-color: rgb(198, 198, 198);
+    background-clip: padding-box;
+    border: 6px solid transparent;
+    border-image: url('../image/single_recipe_background.png') 3;
+    padding: 0px;
+    image-rendering: pixelated;
+    font-family: 'Minecraft', serif;
+}
+
+.slot {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-size: contain;
+    z-index: 1;
+}
+
+.slot::before {
+    /* ::before because different size (32x32 centered inside 36x36) */
+    content: "";
+    width: 32px;
+    height: 32px;
+    float: left;
+    left: 2px; top: 2px; position: absolute;
+    background-image: var(--image);
+    background-size: cover;
+}
+
+.slotAnim::before {
+    /* @keyframes are generated automatically in jei.js */
+    animation: var(--name) var(--duration) steps(1) forwards;
+    animation-iteration-count:infinite;
+}
+
+.slot:hover::after {
+    /* ::after because the opacity shoudn't affect the other images */
+    content: "";
+    width: 32px;
+    height: 32px;
+    float: left;
+    left: 2px; top: 2px; position: absolute;
+    background-color: #FFFFFF;
+    opacity: 0.5;
+}
+
+.recipeinfo {
+    /*bottom: 5px;*/
+    /*top: 133px;*/
+
+    left: 7px;
+    position: absolute;
+    color: rgb(252, 252, 252);
+    text-shadow: 2px 2px rgb(62, 62, 62);
+    font-size: 20px;
+    line-height: 100%;
+    white-space: pre-line;
+}
+
+.recipetier {
+    bottom: 5px;
+    right: 7px;
+    position: absolute;
+    font-size: 20px;
+    line-height: 100%;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.bolderer {
+    bottom: 5px;
+    right: 5px;
+    position: absolute;
+    font-size: 20px;
+    line-height: 100%;
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.tooltip {
+    display: none;
+    position: fixed;
+    
+    background-color: rgba(18, 2, 18, 0.95);
+    background-clip: padding-box;
+    border: 6px solid transparent;
+    border-image: url('../image/tooltip.png') 3;
+    
+    padding-left: 2px;
+    padding-right: 2px;
+    image-rendering: pixelated;
+    z-index: 10;
+    color: rgb(252, 252, 252);
+    text-shadow: 2px 2px rgb(62, 62, 62);
+    font-size: 20px;
+    line-height: 100%;
+    /* -> colors used in the png : rgba(18,2,18, 0.95) and rgba(36,0,94, 0.95)*/
+}
+
+.tooltip > span:first-child {padding-bottom: 4px; display: inline-block;}
+
+.slot:hover .tooltip {display: block;}
+.arrowBottom:hover .tooltip {display: block;}
+.recipetier:hover .tooltip {display: block;}
+
+.qttItem {
+    bottom: -1px;
+    right: 1px;
+    position:absolute;
+    color: rgb(252, 252, 252);
+    text-shadow: 2px 2px rgb(62, 62, 62);
+    font-size: 20px;
+    line-height: 100%;
+}
+
+.qttFluid {
+    bottom: 3px;
+    right: 3.5px;
+    position:absolute;
+    color: rgb(252, 252, 252);
+    text-shadow: 1px 1px rgb(62, 62, 62);
+    font-size: 10px;
+    line-height: 100%;
+}
+
+.chemColor {
+    display: block;
+    color: rgb(252, 252, 84);
+    text-shadow: 2px 2px rgb(62, 62, 21);
+}
+
+.stateColor {
+    display: block;
+    color: rgb(84, 252, 84);
+    text-shadow: 2px 2px rgb(21, 62, 21);
+}
+
+.tempColor {
+    color: rgb(252, 84, 84);
+    text-shadow: 2px 2px rgb(62, 21, 21);
+}
+
+.modColor {
+    display: block;
+    color: rgb(84, 84, 252);
+    text-shadow: 2px 2px rgb(21, 21, 62);
+    font-style: italic;
+}
+
+.arrowBottom {
+    position: absolute;
+    width: var(--width);
+    height: var(--height);
+    overflow: hidden;
+    background-size: cover;
+}
+
+.arrowTop {
+    position: absolute;
+    width: var(--width);
+    height: var(--height);
+    overflow: hidden;
+    pointer-events: none;
+
+    animation-name: var(--anim);
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: var(--timingf);
+}
+
+.arrowTop::before {
+    content: "";
+    position: absolute;
+    bottom:0px;
+    width: var(--width);
+    height: var(--height);
+    background-image: var(--image);
+    background-size: cover;
+    background-position: bottom;
+}
+
+@keyframes arrowRight {from {width: 0px;} to {width: 36px;}}
+@keyframes arrowFlame {from {height: 0px;} to {height: 36px;}}
+@keyframes arrowAssline {from {width: 0px;} to {width: 108px;}}
+@keyframes arrowDistower1 {0% {width: 0px;} 50% {width: 0px;} 100% {width: 130px;}}
+@keyframes arrowDistower2 {0% {height: 0px;} 50% {height: 0px;} 100% {height: 102px;}}
+@keyframes arrowDistower3 {0% {height: 0px;} 50% {height: 40px;} 100% {height: 40px;}}
