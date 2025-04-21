@@ -32,17 +32,18 @@ To registry a new recipe type: It will start by "document.querySelectorAll(name)
     Set the height and width, 1px in game = 2px here
     AddText(recipe, height) to add the text on the bottom
         height: Number, optional if the max number of text lines in the box is 3, should be equal to recipe.style.height (without px) - 20*(max number of lines) - 17
-    setSlot(recipe, slotn, top, left, slotimg, overlayimg) to add a new slot
-        slotn: Number, the "id" of the slot, should be in a logical order
-        top, left: Number, the position in px of the slot
-        slotimg: String, the file of the slot image (found in assets/image/slot)
-        overlayimg: String, the file of the overlay image (found in assets/image/slot)
     setArrow(recipe, top, left, arrowimg, pagepath)
         top, left: Number, the position in px of the arrow
             if centered, left should be equal to (recipe.style.width-3-arrowWidth)/2
                 arrowWidth: 40 for arrows, 36 for flames etc
         arrowimg: String, the file of the arrow image (found in assets/image/progress_bar)
         pagepath: String, the path after StarT-docs/ ending with the page where the arrow should send when clicked
+    setSlot(recipe, slotn, top, left, slotimg, overlayimg) to add a new slot
+        slotn: Number, the "id" of the slot, should be in a logical order
+        top, left: Number, the position in px of the slot
+        slotimg: String, the file of the slot image (found in assets/image/slot)
+        overlayimg: String, the file of the overlay image (found in assets/image/slot)
+    
 
     Be pixel precise!
 */
@@ -59,7 +60,7 @@ const path = location.pathname.split("/")[1] === "trulyno" ? "trulyno/StarT-docs
 
 //Registry of items and fluid. Don't forget to add the texture to, if the item is called "name", the texture must be called "name.png"
 //Currently, only handle animations frame by frame, without "interpolate":true
-const pool = {
+var pool = {
     template: {
         displayName: "", //Name to Display ; either a string or an array such ass array[0] = text to display, array[1] = rgb color ; eg. ["Nether Star", "rgb(252, 252, 84)"]
         chem: "", //Chemical formula (optional) ; use ^ or _ to convert following numbers into superscript or subscript (eg. H_2O, Pu^241)
@@ -126,6 +127,30 @@ const pool = {
     },
 };
 
+const material = {
+    cobalt: {
+        displayName: "Cobalt",
+        chem: "Co",
+        temp: "1768 K",
+        mod: "GregTech",
+        url: "Gameplay/Materials/Elements/Cobalt",
+        color: 5263610,
+        set: "metallic",
+    }
+}
+
+for (mat in material) {
+    pool[mat + "_ingot"] = {
+        displayName: material[mat].displayName + " Ingot",
+        chem: material[mat].chem,
+        mod: material[mat].mod,
+        url: "Gameplay/Item Types/Ingot",
+        color: material[mat].color,
+        set: material[mat].set,
+        type:"ingot",
+    }
+}
+
 //Registry of recipe types
 //It's scalled x2, so one pixel ingame is two pixels here
 //Be pixel-precise please!
@@ -133,6 +158,7 @@ document.querySelectorAll(".abs").forEach(recipe => {
     recipe.style.height = "306px";
     recipe.style.width = "344px";
     addText(recipe, 169);
+    setArrow(recipe, 62, 146, "progress_bar_arrow.png", "right", "Gameplay/Recipe Types/Alloy Blast Smelter");
 
     setSlot(recipe, 1, 10, 10, "slot.png", "furnace_overlay_1.png");
     setSlot(recipe, 2, 10, 46, "slot.png", "furnace_overlay_1.png");
@@ -150,27 +176,25 @@ document.querySelectorAll(".abs").forEach(recipe => {
     setSlot(recipe, 13, 64, 250, "fluid_slot.png", "furnace_overlay_2.png");
 
     setSlot(recipe, 14, 212, 280, "slot.png");
-
-    setArrow(recipe, 62, 146, "progress_bar_arrow.png", "right", "Gameplay/Recipe Types/Alloy Blast Smelter");
 });
 
 document.querySelectorAll(".alloy").forEach(recipe => {
     recipe.style.height = "138px";
     recipe.style.width = "316px";
     addText(recipe);
+    setArrow(recipe, 8, 132, "progress_bar_arrow.png", "right", "Gameplay/Recipe Types/Alloy Smelter");
 
     setSlot(recipe, 1, 10, 32, "slot.png", "furnace_overlay_1.png");
     setSlot(recipe, 2, 10, 68, "slot.png", "furnace_overlay_1.png");
 
     setSlot(recipe, 3, 10, 218, "slot.png");
-
-    setArrow(recipe, 8, 132, "progress_bar_arrow.png", "right", "Gameplay/Recipe Types/Alloy Smelter");
 });
 
 document.querySelectorAll(".arc").forEach(recipe => {
     recipe.style.height = "210px";
     recipe.style.width = "344px";
     addText(recipe);
+    setArrow(recipe, 44, 146, "progress_bar_arc_furnace.png", "right", "Gameplay/Recipe Types/Arc Furnace");
 
     setSlot(recipe, 1, 28, 46, "slot.png");
     setSlot(recipe, 2, 64, 46, "fluid_slot.png");
@@ -180,14 +204,13 @@ document.querySelectorAll(".arc").forEach(recipe => {
     setSlot(recipe, 5, 10, 286, "slot.png");
     setSlot(recipe, 6, 46, 214, "slot.png");
     setSlot(recipe, 7, 82, 214, "fluid_slot.png");
-
-    setArrow(recipe, 44, 146, "progress_bar_arc_furnace.png", "right", "Gameplay/Recipe Types/Arc Furnace");
 });
 
 document.querySelectorAll(".assembler").forEach(recipe => {
     recipe.style.height = "246px";
     recipe.style.width = "344px";
     addText(recipe);
+    setArrow(recipe, 62, 146, "progress_bar_assembler.png", "right", "Gameplay/Recipe Types/Assembler");
 
     setSlot(recipe, 1, 10, 10, "slot.png", "circuit_overlay.png");
     setSlot(recipe, 2, 10, 46, "slot.png", "circuit_overlay.png");
@@ -201,14 +224,13 @@ document.querySelectorAll(".assembler").forEach(recipe => {
     setSlot(recipe, 10, 118, 10, "fluid_slot.png");
 
     setSlot(recipe, 11, 64, 250, "slot.png");
-
-    setArrow(recipe, 62, 146, "progress_bar_assembler.png", "right", "Gameplay/Recipe Types/Assembler");
 });
 
 document.querySelectorAll(".assline").forEach(recipe => {
     recipe.style.height = "266px";
     recipe.style.width = "324px";
     addText(recipe, 169);
+    setArrow(recipe, 0, 0, "", "assline", "Gameplay/Recipe Types/Assembly Line");
 
     setSlot(recipe, 1, 10, 10, "slot.png");
     setSlot(recipe, 2, 10, 46, "slot.png");
@@ -232,17 +254,16 @@ document.querySelectorAll(".assline").forEach(recipe => {
     setSlot(recipe, 19, 82, 188, "fluid_slot.png");
     setSlot(recipe, 20, 118, 188, "fluid_slot.png");
 
-    setSlot(recipe, 16, 10, 262, "slot.png");
+    setSlot(recipe, 21, 10, 262, "slot.png");
 
-    setSlot(recipe, 3, 82, 262, "slot.png", "data_orb_overlay.png");
-
-    setArrow(recipe, 0, 0, "", "assline", "Gameplay/Recipe Types/Assembly Line");
+    setSlot(recipe, 22, 82, 262, "slot.png", "data_orb_overlay.png");
 });
 
 document.querySelectorAll(".autoclave").forEach(recipe => {
     recipe.style.height = "174px";
     recipe.style.width = "316px";
     addText(recipe);
+    setArrow(recipe, 26, 132, "progress_bar_crystallization.png", "right", "Gameplay/Recipe Types/Autoclave");
 
     setSlot(recipe, 1, 10, 32, "slot.png", "dust_overlay.png");
     setSlot(recipe, 2, 10, 68, "slot.png", "dust_overlay.png");
@@ -251,8 +272,6 @@ document.querySelectorAll(".autoclave").forEach(recipe => {
     setSlot(recipe, 1, 10, 200, "slot.png", "crystal_overlay.png");
     setSlot(recipe, 2, 10, 236, "slot.png", "crystal_overlay.png");
     setSlot(recipe, 3, 46, 200, "fluid_slot.png");
-
-    setArrow(recipe, 26, 132, "progress_bar_crystallization.png", "right", "Gameplay/Recipe Types/Autoclave");
 });
 
 //Bacteria breeding
@@ -265,19 +284,19 @@ document.querySelectorAll(".bender").forEach(recipe => {
     recipe.style.height = "138px";
     recipe.style.width = "316px";
     addText(recipe);
+    setArrow(recipe, 8, 132, "progress_bar_bending.png", "right", "Gameplay/Recipe Types/Bender");
 
     setSlot(recipe, 1, 10, 32, "slot.png", "bender_overlay.png");
     setSlot(recipe, 2, 10, 68, "slot.png", "int_circuit_overlay.png");
 
     setSlot(recipe, 3, 10, 218, "slot.png");
-
-    setArrow(recipe, 8, 132, "progress_bar_bending.png", "right", "Gameplay/Recipe Types/Bender");
 });
 
 document.querySelectorAll(".sbf").forEach(recipe => {
     recipe.style.height = "138px";
     recipe.style.width = "344px";
     addText(recipe);
+    setArrow(recipe, 10, 148, "progress_bar_default.png", "flame", "Gameplay/Recipe Types/Solid Blast Furnace");
 
     setSlot(recipe, 1, 10, 10, "slot.png");
     setSlot(recipe, 2, 10, 46, "slot.png");
@@ -286,27 +305,25 @@ document.querySelectorAll(".sbf").forEach(recipe => {
     setSlot(recipe, 4, 10, 214, "slot.png");
     setSlot(recipe, 5, 10, 250, "slot.png");
     setSlot(recipe, 6, 10, 286, "slot.png");
-
-    setArrow(recipe, 10, 148, "progress_bar_default.png", "flame", "Gameplay/Recipe Types/Solid Blast Furnace");
 });
 
 document.querySelectorAll(".brewery").forEach(recipe => {
     recipe.style.height = "174px";
     recipe.style.width = "316px";
     addText(recipe);
+    setArrow(recipe, 26, 132, "progress_bar_arrow_multiple.png", "right", "Gameplay/Recipe Types/Brewery");
 
     setSlot(recipe, 1, 10, 68, "slot.png", "brewer_overlay.png");
     setSlot(recipe, 2, 46, 68, "fluid_slot.png");
 
     setSlot(recipe, 3, 28, 200, "fluid_slot.png");
-
-    setArrow(recipe, 26, 132, "progress_bar_arrow_multiple.png", "right", "Gameplay/Recipe Types/Brewery");
 });
 
 document.querySelectorAll(".canner").forEach(recipe => {
     recipe.style.height = "174px";
     recipe.style.width = "316px";
     addText(recipe);
+    setArrow(recipe, 26, 132, "progress_bar_canner.png", "right", "Gameplay/Recipe Types/Canner");
 
     setSlot(recipe, 1, 10, 32, "slot.png", "canner_overlay.png");
     setSlot(recipe, 2, 10, 68, "slot.png", "canister_overlay.png");
@@ -315,14 +332,13 @@ document.querySelectorAll(".canner").forEach(recipe => {
     setSlot(recipe, 4, 10, 200, "slot.png", "canister_overlay.png");
     setSlot(recipe, 5, 10, 236, "slot.png", "canister_overlay.png");
     setSlot(recipe, 6, 46, 200, "fluid_slot.png", "dark_canister_overlay.png");
-
-    setArrow(recipe, 26, 132, "progress_bar_canner.png", "right", "Gameplay/Recipe Types/Canner");
 });
 
 document.querySelectorAll(".centrifuge").forEach(recipe => {
     recipe.style.height = "246px";
     recipe.style.width = "344px";
     addText(recipe);
+    setArrow(recipe, 62, 146, "progress_bar_extract.png", "right", "Gameplay/Recipe Types/Centrifuge");
 
     setSlot(recipe, 1, 46, 28, "slot.png", "extractor_overlay.png");
     setSlot(recipe, 2, 46, 64, "slot.png", "canister_overlay.png");
@@ -340,14 +356,13 @@ document.querySelectorAll(".centrifuge").forEach(recipe => {
     setSlot(recipe, 13, 118, 214, "fluid_slot.png");
     setSlot(recipe, 14, 118, 250, "fluid_slot.png");
     setSlot(recipe, 15, 118, 286, "fluid_slot.png");
-
-    setArrow(recipe, 62, 146, "progress_bar_extract.png", "right", "Gameplay/Recipe Types/Centrifuge");
 });
 
 document.querySelectorAll(".bath").forEach(recipe => {
     recipe.style.height = "210px";
     recipe.style.width = "344px";
     addText(recipe);
+    setArrow(recipe, 44, 146, "progress_bar_mixer.png", "right", "Gameplay/Recipe Types/Chemical Bath");
 
     setSlot(recipe, 1, 28, 46, "slot.png", "brewer_overlay.png");
     setSlot(recipe, 2, 64, 46, "fluid_slot.png");
@@ -359,14 +374,13 @@ document.querySelectorAll(".bath").forEach(recipe => {
     setSlot(recipe, 7, 46, 250, "slot.png", "dust_overlay.png");
     setSlot(recipe, 8, 46, 286, "slot.png", "dust_overlay.png");
     setSlot(recipe, 9, 82, 214, "fluid_slot.png");
-
-    setArrow(recipe, 44, 146, "progress_bar_mixer.png", "right", "Gameplay/Recipe Types/Chemical Bath");
 });
 
 document.querySelectorAll(".plant").forEach(recipe => {
     recipe.style.height = "318px";
     recipe.style.width = "344px";
     addText(recipe);
+    setArrow(recipe, 100, 148, "progress_bar_default.png", "flame", "Gameplay/Recipe Types/Chemical plant");
 
     setSlot(recipe, 1, 10, 10, "slot.png");
     setSlot(recipe, 2, 10, 46, "slot.png");
@@ -405,14 +419,13 @@ document.querySelectorAll(".plant").forEach(recipe => {
     setSlot(recipe, 16, 190, 214, "fluid_slot.png");
     setSlot(recipe, 17, 190, 250, "fluid_slot.png");
     setSlot(recipe, 18, 190, 286, "fluid_slot.png");
-
-    setArrow(recipe, 100, 148, "progress_bar_default.png", "flame", "Gameplay/Recipe Types/Chemical plant");
 });
 
 document.querySelectorAll(".chem").forEach(recipe => {
     recipe.style.height = "194px";
     recipe.style.width = "344px";
     addText(recipe, 97);
+    setArrow(recipe, 26, 146, "progress_bar_arrow_multiple.png", "right", "Gameplay/Recipe Types/Chemical Reactor");
 
     setSlot(recipe, 1, 10, 10, "slot.png", "molecular_overlay_1.png");
     setSlot(recipe, 2, 10, 46, "slot.png", "molecular_overlay_2.png");
@@ -424,14 +437,13 @@ document.querySelectorAll(".chem").forEach(recipe => {
     setSlot(recipe, 7, 10, 268, "slot.png", "vial_overlay_1.png");
     setSlot(recipe, 8, 46, 232, "fluid_slot.png", "vial_overlay_2.png");
     setSlot(recipe, 9, 46, 268, "fluid_slot.png", "vial_overlay_2.png");
-
-    setArrow(recipe, 26, 146, "progress_bar_arrow_multiple.png", "right", "Gameplay/Recipe Types/Chemical Reactor");
 });
 
 document.querySelectorAll(".circuit").forEach(recipe => {
     recipe.style.height = "230px";
     recipe.style.width = "344px";
     addText(recipe, 133);
+    setArrow(recipe, 44, 146, "progress_bar_circuit_assembler.png", "right", "Gameplay/Recipe Types/Circuit Assembler");
 
     setSlot(recipe, 1, 10, 10, "slot.png", "circuit_overlay.png");
     setSlot(recipe, 2, 10, 46, "slot.png", "circuit_overlay.png");
@@ -442,45 +454,40 @@ document.querySelectorAll(".circuit").forEach(recipe => {
     setSlot(recipe, 7, 82, 10, "fluid_slot.png");
 
     setSlot(recipe, 8, 46, 250, "slot.png");
-
-    setArrow(recipe, 44, 146, "progress_bar_circuit_assembler.png", "right", "Gameplay/Recipe Types/Circuit Assembler");
 });
 
 document.querySelectorAll(".cobbleworks").forEach(recipe => {
     recipe.style.height = "174px";
     recipe.style.width = "316px";
     addText(recipe);
+    setArrow(recipe, 28, 134, "progress_bar_default.png", "flame", "Gameplay/Recipe Types/Large Sieve Cobbleworks");
 
     setSlot(recipe, 1, 10, 32, "slot.png");
     setSlot(recipe, 2, 46, 32, "fluid_slot.png");
     setSlot(recipe, 3, 46, 68, "fluid_slot.png");
 
     setSlot(recipe, 4, 28, 218, "slot.png");
-
-    setArrow(recipe, 28, 134, "progress_bar_default.png", "flame", "Gameplay/Recipe Types/Large Sieve Cobbleworks");
 });
 
 document.querySelectorAll(".coke").forEach(recipe => {
     recipe.style.height = "134px";
     recipe.style.width = "316px";
     addText(recipe, 97);
+    setArrow(recipe, 26, 132, "progress_bar_arrow.png", "right", "Gameplay/Recipe Types/Coke Oven");
 
     setSlot(recipe, 1, 28, 68, "slot.png");
 
     setSlot(recipe, 2, 10, 200, "slot.png");
     setSlot(recipe, 3, 46, 200, "fluid_slot.png");
-
-    setArrow(recipe, 26, 132, "progress_bar_arrow.png", "right", "Gameplay/Recipe Types/Coke Oven");
 });
 
 document.querySelectorAll(".combustion").forEach(recipe => {
     recipe.style.height = "138px";
     recipe.style.width = "316px";
     addText(recipe);
+    setArrow(recipe, 8, 132, "progress_bar_arrow_multiple.png", "right", "Gameplay/Recipe Types/Combustion Generator");
 
     setSlot(recipe, 1, 10, 68, "fluid_slot.png", "furnace_overlay_2.png");
-
-    setArrow(recipe, 8, 132, "progress_bar_arrow_multiple.png", "right", "Gameplay/Recipe Types/Combustion Generator");
 });
 
 //Component part assembly
@@ -495,6 +502,7 @@ document.querySelectorAll(".distower").forEach(recipe => {
     recipe.style.height = "278px";
     recipe.style.width = "316px";
     addText(recipe);
+    setArrow(recipe, 0, 0, "", "distower", "Gameplay/Recipe Types/Distillation Tower");
 
     setSlot(recipe, 1, 80, 36, "fluid_slot.png", "beaker_overlay_1.png");
 
@@ -511,8 +519,6 @@ document.querySelectorAll(".distower").forEach(recipe => {
     setSlot(recipe, 12, 116, 196, "fluid_slot.png", "beaker_overlay_3.png");
     setSlot(recipe, 13, 116, 232, "fluid_slot.png", "beaker_overlay_4.png");
     setSlot(recipe, 14, 152, 160, "slot.png", "dust_overlay.png");
-
-    setArrow(recipe, 0, 0, "", "distower", "Gameplay/Recipe Types/Distillation Tower");
 });
 
 //Distillery
@@ -523,6 +529,7 @@ document.querySelectorAll(".electrolizer").forEach(recipe => {
     recipe.style.height = "246px";
     recipe.style.width = "344px";
     addText(recipe);
+    setArrow(recipe, 62, 146, "progress_bar_extract.png", "right", "Gameplay/Recipe Types/Electrolizer");
 
     setSlot(recipe, 1, 46, 28, "slot.png", "lightning_overlay_1.png");
     setSlot(recipe, 2, 46, 64, "slot.png", "canister_overlay.png");
@@ -540,8 +547,6 @@ document.querySelectorAll(".electrolizer").forEach(recipe => {
     setSlot(recipe, 13, 118, 214, "fluid_slot.png");
     setSlot(recipe, 14, 118, 250, "fluid_slot.png");
     setSlot(recipe, 15, 118, 286, "fluid_slot.png");
-
-    setArrow(recipe, 62, 146, "progress_bar_extract.png", "right", "Gameplay/Recipe Types/Electrolizer");
 });
 
 //Electromagnetic separator
@@ -572,6 +577,7 @@ document.querySelectorAll(".lchem").forEach(recipe => {
     recipe.style.height = "210px";
     recipe.style.width = "344px";
     addText(recipe);
+    setArrow(recipe, 42, 146, "progress_bar_arrow_multiple.png", "right", "Gameplay/Recipe Types/Large Chemical Reactor");
 
     setSlot(recipe, 1, 10, 10, "slot.png", "molecular_overlay_1.png");
     setSlot(recipe, 2, 10, 46, "slot.png", "molecular_overlay_1.png");
@@ -589,8 +595,6 @@ document.querySelectorAll(".lchem").forEach(recipe => {
     setSlot(recipe, 13, 46, 250, "fluid_slot.png", "vial_overlay_2.png");
     setSlot(recipe, 14, 46, 286, "fluid_slot.png", "vial_overlay_2.png");
     setSlot(recipe, 15, 82, 214, "fluid_slot.png", "vial_overlay_2.png");
-
-    setArrow(recipe, 42, 146, "progress_bar_arrow_multiple.png", "right", "Gameplay/Recipe Types/Large Chemical Reactor");
 });
 
 //Large farm
@@ -890,8 +894,37 @@ function setSlot(recipeA, slotn = 1, top = 10, left = 10, slotimg = "slot.png", 
     var qtt = recipeA.dataset["slot"+slotn] === undefined ? undefined : recipeA.dataset["slot"+slotn].split(" ")[1];
 
     if (item !== undefined) {
-        if (pool[item] === undefined) {item = "missing_texture"}
-        slot.style.setProperty("--image", "url('../image/textures/" + pool[item].mod + "/" + item + ".png')");
+        if (pool[item] === undefined) {item = "missing_texture"};
+        if (pool[item].set === undefined) {
+            var itemTexture = document.createElement("div");
+            itemTexture.classList.add("itemTexture");
+            itemTexture.style.setProperty("--image", "url('../image/textures/" + pool[item].mod + "/" + item + ".png')");
+            itemTexture.style.setProperty("--color", "rgb(255, 255, 255)");
+            slot.appendChild(itemTexture);
+        } else {
+
+            var itemTexture = document.createElement("div");
+            itemTexture.classList.add("itemTexture");
+            itemTexture.style.setProperty("--image", "url('../ingot.png')");
+            itemTexture.style.setProperty("--color", "rgb(115, 215, 61)");
+            slot.appendChild(itemTexture);
+
+            var itemTexture = document.createElement("div");
+            itemTexture.classList.add("itemTexture");
+            itemTexture.style.setProperty("--image", "url('../ingot_overlay.png')");
+            itemTexture.style.setProperty("--color", "rgb(255, 255, 255)");
+            slot.appendChild(itemTexture);
+
+            var itemTexture = document.createElement("div");
+            itemTexture.classList.add("itemTexture");
+            itemTexture.style.setProperty("--image", "url('../ingot_secondary.png')");
+            itemTexture.style.setProperty("--color", "rgb(24, 69, 55)");
+            slot.appendChild(itemTexture);
+
+        }
+
+
+
         slot.href = "/" + path + pool[item].url;
 
         var tooltip = document.createElement("span");

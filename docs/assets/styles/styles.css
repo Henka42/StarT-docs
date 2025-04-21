@@ -53,25 +53,23 @@ UIV { color: #0A0; }
     width: 36px;
     height: 36px;
     background-size: contain;
-    z-index: 1;
 }
 
+/*
 .slot::before {
-    /* ::before because different size (32x32 centered inside 36x36) */
+    * ::before because different size (32x32 centered inside 36x36) *
     content: "";
     width: 32px;
     height: 32px;
     float: left;
     left: 2px; top: 2px; position: absolute;
-    background-image: var(--image);
+    background-image: *linear-gradient(rgba(80, 80, 250, 0.5), rgba(80, 80, 250, 0.5)),* var(--image);
     background-size: cover;
+    *box-shadow: inset 0 0 0 1000px rgba(80,80,250,.5);*
+    *filter: drop-shadow(0 2px blue);*
+    *background-blend-mode: multiply;*
 }
-
-.slotAnim::before {
-    /* @keyframes are generated automatically in jei.js */
-    animation: var(--name) var(--duration) steps(1) forwards;
-    animation-iteration-count:infinite;
-}
+*/
 
 .slot:hover::after {
     /* ::after because the opacity shoudn't affect the other images */
@@ -82,6 +80,25 @@ UIV { color: #0A0; }
     left: 2px; top: 2px; position: absolute;
     background-color: #FFFFFF;
     opacity: 0.5;
+}
+
+.slotAnim::before {
+    /* @keyframes are generated automatically in jei.js */
+    animation: var(--name) var(--duration) steps(1) forwards;
+    animation-iteration-count:infinite;
+}
+
+.itemTexture {
+    width: 32px;
+    height: 32px;
+    float: left;
+    left: 2px; top: 2px; position: absolute;
+    background-color: var(--color);
+    background-image: var(--image);
+    background-size: cover;
+    background-blend-mode: multiply;
+    mask-image: var(--image);
+    mask-size: cover;
 }
 
 .recipeinfo {
@@ -235,3 +252,13 @@ UIV { color: #0A0; }
 @keyframes arrowDistower1 {0% {width: 0px;} 50% {width: 0px;} 100% {width: 130px;}}
 @keyframes arrowDistower2 {0% {height: 0px;} 50% {height: 0px;} 100% {height: 102px;}}
 @keyframes arrowDistower3 {0% {height: 0px;} 50% {height: 40px;} 100% {height: 40px;}}
+
+.test::before {
+    content: "";
+
+    background-color: rgba(80,80,250,0.5);
+    z-index: 1000;
+}
+/*
+<div class="slot" style="top:154px; left:10px; background:rgba(80,80,250,0.5);"></div>
+*/

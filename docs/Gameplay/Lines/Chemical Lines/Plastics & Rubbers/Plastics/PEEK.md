@@ -2,6 +2,8 @@
 
 PEEK is a type of plastic that is widely used late-game. In reality, it is a colourless organic thermoplastic polymer in the polyaryletherketone (PAEK) family, used in engineering applications. 
 
+<div class="jei assline" data-slot1="apple" data-slot2="cobalt_ingot"></div>
+
 ## How to Make PEEK
 
 **PEEK is mainly made from *4,4-Difluorobenzophenone Dust* and *Disodium Salt of Hydroquione dust***
